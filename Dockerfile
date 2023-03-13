@@ -201,6 +201,7 @@ FROM base as app-dev
 
 ENV APP_ENV dev
 ENV APP_DEBUG 1
+ENV PHP_IDE_CONFIG serverName=myserver
 
 # Switch root to install stuff
 USER root

@@ -14,10 +14,10 @@ deploy:			## Start using Prod Image in Prod Mode
 
 up:				## Start service
 	@echo "Starting Application \n (note: Web container will wait App container to start before starting)"
-	${COMPOSE_PREFIX_CMD} docker-compose up -d
+	${COMPOSE_PREFIX_CMD} docker-compose up
 
 build-up:       ## Start service, rebuild if necessary
-	${COMPOSE_PREFIX_CMD} docker-compose up --build -d
+	${COMPOSE_PREFIX_CMD} docker-compose up --build
 
 build:			## Build The Image
 	${COMPOSE_PREFIX_CMD} docker-compose build

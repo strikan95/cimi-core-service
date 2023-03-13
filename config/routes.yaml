@@ -1,0 +1,11 @@
+listing_controllers:
+    resource:
+        path: ../src/Controller/Listing
+        namespace: App\Controller\Listing
+    type: attribute
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
