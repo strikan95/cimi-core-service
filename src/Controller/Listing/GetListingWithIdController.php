@@ -2,9 +2,8 @@
 
 namespace App\Controller\Listing;
 
-use App\DTO\ListingResponseDto;
+use App\DTO\ListingDto;
 use App\Repository\ListingRepository;
-use App\Service\DTOSerializer;
 use App\Service\EntityDtoMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +33,7 @@ class GetListingWithIdController extends AbstractController
         }
 
         $responseContent = $this->serializer->serialize(
-            EntityDtoMapper::map($listing, ListingResponseDto::class),
+            EntityDtoMapper::map($listing, ListingDto::class),
             'json'
         );
 

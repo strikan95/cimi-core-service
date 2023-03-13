@@ -2,34 +2,25 @@
 
 namespace App\Tests\unit;
 
-use App\DTO\ListingDtoAttributeMapped;
-use App\DTO\ListingResponseDto;
+use App\DTO\ListingDto;
 use App\Entity\Listing;
 use App\Service\EntityDtoMapper;
 use App\Tests\FixtureAwareTestCase;
 use App\Tests\fixtures\ListingTestFixture;
-use PHPUnit\Framework\TestCase;
+use ReflectionException;
 
 class EntityDtoMapperTest extends FixtureAwareTestCase
 {
     private array $fixtureReferences;
 
-    /** @test */
-    public function test2()
-    {
-        $entity = $this->fixtureReferences[Listing::class][ListingTestFixture::FOO_LISTING_REFERENCE];
-
-        $dto = EntityDtoMapper::map_test($entity, ListingDtoAttributeMapped::class);
-
-        dd($dto);
-    }
-
-    /** @test */
+    /** @test
+     * @throws ReflectionException
+     */
     public function test()
     {
         $entity = $this->fixtureReferences[Listing::class][ListingTestFixture::FOO_LISTING_REFERENCE];
 
-        $dto = EntityDtoMapper::map($entity, ListingResponseDto::class);
+        $dto = EntityDtoMapper::map($entity, ListingDto::class);
 
         $this->assertNotNull($dto);
         $this->assertEquals($entity->getTitle(), $dto->getTitle());

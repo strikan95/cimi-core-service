@@ -2,7 +2,7 @@
 
 namespace App\Tests\unit;
 
-use App\Service\DTOSerializer;
+use App\Service\DtoSerializer;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;

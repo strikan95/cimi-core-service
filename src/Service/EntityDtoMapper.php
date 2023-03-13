@@ -2,21 +2,17 @@
 
 namespace App\Service;
 
-use App\Annotation\DataMapper;
-use App\Attribute\AttributeMap;
-use Doctrine\Common\Annotations\AnnotationReader;
+use App\Attribute\EntityPropertyMap;
 use ReflectionClass;
 use ReflectionException;
-use ReflectionProperty;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class EntityDtoMapper
 {
-
     /**
      * @throws ReflectionException
      */
-    public static function map_test(object $source, string $targetClass)
+    public static function map(object $source, string $targetClass)
     {
         $target = new $targetClass();
         $attributes = self::getAttributes($targetClass);
@@ -34,16 +30,6 @@ class EntityDtoMapper
                 $attribute,
                 $sourcePropValue
             );
-            /*            $propValue = $propertyAccessor->getValue(
-                            $source,
-                            $propertyAnnotation->entity_field
-                        );
-
-                        $propertyAccessor->setValue(
-                            $target,
-                            $property->getName(),
-                            $propValue
-                        );*/
         }
 
         return $target;
@@ -60,7 +46,7 @@ class EntityDtoMapper
 
         foreach ($properties as $property)
         {
-            $propertyAttributes = $property->getAttributes(AttributeMap::class);
+            $propertyAttributes = $property->getAttributes(EntityPropertyMap::class);
 
             // Only one attribute should be but take last one
             $attributeArguments = end($propertyAttributes)
@@ -71,45 +57,5 @@ class EntityDtoMapper
         }
 
         return $attributes;
-    }
-
-    public static function map(object $source, string $targetClass)
-    {
-        $target = new $targetClass();
-        $reader = new AnnotationReader();
-        $propertyAccessor = new PropertyAccessor();
-
-        $properties = self::getProperties($target);
-
-        foreach ($properties as $key => $property)
-        {
-            $propertyAnnotation = $reader->getPropertyAnnotation(
-                $property,
-                DataMapper::class
-            );
-
-            $propValue = $propertyAccessor->getValue(
-                $source,
-                $propertyAnnotation->entity_field
-            );
-
-            $propertyAccessor->setValue(
-                $target,
-                $property->getName(),
-                $propValue
-            );
-        }
-
-        return $target;
-    }
-
-    private static function getProperties(object $object): array
-    {
-        $reflect = new ReflectionClass($object);
-        return $reflect->getProperties(
-            ReflectionProperty::IS_PUBLIC |
-            ReflectionProperty::IS_PROTECTED |
-            ReflectionProperty::IS_PRIVATE
-        );
     }
 }

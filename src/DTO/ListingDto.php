@@ -2,28 +2,19 @@
 
 namespace App\DTO;
 
+use App\Attribute\EntityPropertyMap;
 use DateTime;
 use Symfony\Component\Uid\Uuid;
-use App\Annotation\DataMapper;
 
-class ListingResponseDto
+class ListingDto
 {
-    /**
-     * @var Uuid
-     * @DataMapper(entity_field="id")
-     */
+    #[EntityPropertyMap(property_name: 'id')]
     private Uuid $id;
 
-    /**
-     * @var DateTime
-     * @DataMapper(entity_field="createdAt")
-     */
+    #[EntityPropertyMap(property_name: 'createdAt')]
     private DateTime $createdAt;
 
-    /**
-     * @var string
-     * @DataMapper(entity_field="title")
-     */
+    #[EntityPropertyMap(property_name: 'title')]
     private string $title;
 
 
@@ -42,6 +33,8 @@ class ListingResponseDto
     {
         $this->title = $title;
     }
+
+    // GETTERS
 
     public function getId(): Uuid
     {

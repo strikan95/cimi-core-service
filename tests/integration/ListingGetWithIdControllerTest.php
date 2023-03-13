@@ -3,7 +3,7 @@
 namespace App\Tests\integration;
 
 use App\Entity\Listing;
-use App\Service\DTOSerializer;
+use App\Service\DtoSerializer;
 use App\Tests\FixtureAwareTestCase;
 use App\Tests\fixtures\ListingTestFixture;
 
@@ -31,7 +31,7 @@ class ListingGetWithIdControllerTest extends FixtureAwareTestCase
         $this->assertEquals($foo->getId(), $data['id']);
         $this->assertEquals($foo->getTitle(), $data['title']);
         $this->assertEquals(
-            $foo->getCreatedAt()->format(DTOSerializer::getDateTimeFormat()),
+            $foo->getCreatedAt()->format(DtoSerializer::getDateTimeFormat()),
             $data['created_at']);
 
         dump($data);

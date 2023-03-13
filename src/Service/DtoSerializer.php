@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Normalizer\UidNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class DTOSerializer implements SerializerInterface
+class DtoSerializer implements SerializerInterface
 {
     private const DATETIME_FORMAT = 'Y-m-d';
 
